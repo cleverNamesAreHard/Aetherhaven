@@ -1,6 +1,6 @@
 import pygame
 from ui.main_menu import main_menu
-from core.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS
+from core.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, GAME_ICON_PATH
 
 def main():
     pygame.init()
@@ -10,8 +10,7 @@ def main():
     pygame.display.set_caption("Aetherhaven")
 
     # Now it's safe to load and set the icon
-    icon_path = "assets/logos/logo128.png"
-    icon_surface = pygame.image.load(icon_path)  # No convert_alpha()
+    icon_surface = pygame.image.load(GAME_ICON_PATH)
     pygame.display.set_icon(icon_surface)
 
     clock = pygame.time.Clock()
