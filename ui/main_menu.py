@@ -3,9 +3,11 @@ import os
 from core.config import FONT_PATH, MENU_LOGO_PATH, MENU_BACKGROUND_PATH
 from ui.new_game import new_game_menu
 
+
 def has_save_files():
     save_dir = "save_data"
     return any(file.endswith(".json") for file in os.listdir(save_dir))
+
 
 def main_menu(screen, clock):
     font = pygame.font.Font(FONT_PATH, 30)
@@ -27,18 +29,24 @@ def main_menu(screen, clock):
     spacing_between_logo_and_menu = 20
     spacing_between_items = 50
 
-    item_surfaces = [font.render(item, True, (255, 255, 255)) for item in menu_items]
-    total_menu_height = logo_rect.height + spacing_between_logo_and_menu + len(menu_items) * spacing_between_items
+    item_surfaces = [font.render(item, True, (255, 255, 255))
+                     for item in menu_items]
+    total_menu_height = logo_rect.height + spacing_between_logo_and_menu + \
+        len(menu_items) * spacing_between_items
     top_offset = (screen.get_height() - total_menu_height) // 2
 
     logo_rect.centerx = screen.get_width() // 2
     logo_rect.top = top_offset
 
     item_rects = [
-        surf.get_rect(centerx=screen.get_width() // 2,
-                      top=logo_rect.bottom + spacing_between_logo_and_menu + i * spacing_between_items)
-        for i, surf in enumerate(item_surfaces)
-    ]
+        surf.get_rect(
+            centerx=screen.get_width() //
+            2,
+            top=logo_rect.bottom +
+            spacing_between_logo_and_menu +
+            i *
+            spacing_between_items) for i,
+        surf in enumerate(item_surfaces)]
 
     running = True
     while running:
@@ -68,7 +76,8 @@ def main_menu(screen, clock):
                 return "quit"
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if hover_index is not None:
-                    selection = menu_items[hover_index].lower().replace(" ", "_")
+                    selection = menu_items[hover_index].lower().replace(
+                        " ", "_")
 
                     if selection == "new_game":
                         result = new_game_menu(screen, clock, font, background)

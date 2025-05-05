@@ -11,7 +11,7 @@ BIOME_COLORS = {
     "mountain": (139, 137, 137),
     "desert": (237, 201, 175),
     "farmland": (181, 101, 29),
-    "hill": (160, 132, 79) 
+    "hill": (160, 132, 79)
 }
 
 RESOURCE_COLORS = {
@@ -19,6 +19,7 @@ RESOURCE_COLORS = {
     "gold": (255, 215, 0),
     "food": (255, 165, 0),
 }
+
 
 def display_game(screen, clock):
     if not game_state.current_save_path:
@@ -40,7 +41,10 @@ def display_game(screen, clock):
     offset_x = (screen.get_width() - (width * tile_size)) // 2
     offset_y = (screen.get_height() - (height * tile_size)) // 2
 
-    print(f"Tile size: {tile_size}, screen: {screen.get_width()}x{screen.get_height()}")
+    print(
+        f"Tile size: {tile_size}, screen: {
+            screen.get_width()}x{
+            screen.get_height()}")
 
     tile_map = {}
     for tile in tiles:
