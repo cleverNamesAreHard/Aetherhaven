@@ -1,5 +1,6 @@
 import pygame
 from ui.main_menu import main_menu
+from ui.display_game import display_game
 from core.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, GAME_ICON_PATH
 
 def main():
@@ -22,7 +23,10 @@ def main():
         pygame.quit()
         return
 
-    # Future: import and call game loop
+    if game_mode == "start_game":
+        display_game(screen, clock)
+
+    # Future: handle resume_game, load_game, etc.
     print(f"Selected game mode: {game_mode}")
 
     pygame.quit()

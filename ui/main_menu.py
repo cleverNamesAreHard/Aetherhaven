@@ -72,10 +72,12 @@ def main_menu(screen, clock):
 
                     if selection == "new_game":
                         result = new_game_menu(screen, clock, font, background)
-                        if isinstance(result, tuple) and result[0] == "start_game":
+                        if result == "start_game":
                             return result
                         elif result == "quit":
                             return "quit"
+                        elif result == "back":
+                            continue  # Stay on menu
                     else:
                         return selection
 

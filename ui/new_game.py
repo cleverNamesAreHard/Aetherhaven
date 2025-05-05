@@ -1,4 +1,6 @@
 import pygame
+from core import game_state
+from world.world_generation import WorldGenerator
 
 def new_game_menu(screen, clock, font, background):
     menu_items = ["Tutorial", "New Game"]
@@ -56,7 +58,10 @@ def new_game_menu(screen, clock, font, background):
                     if result == "new_game":
                         map_size = select_map_size(screen, clock, font, background)
                         if map_size:
-                            return ("start_game", map_size)
+                            generator = WorldGenerator(map_size)
+                            filepath = generator.generate_and_save()
+                            game_state.current_save_path = filepath
+                            return "start_game"
                         else:
                             continue  # go back to this screen
                     return result
