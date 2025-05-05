@@ -3,6 +3,7 @@ from ui.main_menu import main_menu
 from ui.display_game import display_game
 from core.config import SCREEN_WIDTH, SCREEN_HEIGHT, FPS, GAME_ICON_PATH
 
+
 def main():
     pygame.init()
 

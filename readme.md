@@ -67,6 +67,10 @@ If you're adding a new system, try to keep function separated: UI where UI goes,
 
 I recommend you use **autopep8**. I will be going through and doing this myself soon on the whole repo.
 
+### AutoPep8
+
+Windows users, while inside the repo, you can run `cp pre-commit.ps1 .git/hooks/pre-commit.ps1`, and it will cause AutoPep8 to run prior to each commit automatically.
+
 ## TO-DO
 
 1. ~~Basic PyGame window and main loop~~  

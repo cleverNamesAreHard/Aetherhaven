@@ -2,11 +2,13 @@ import pygame
 from core import game_state
 from world.world_generation import WorldGenerator
 
+
 def new_game_menu(screen, clock, font, background):
     menu_items = ["Tutorial", "New Game"]
     spacing_between_items = 50
 
-    item_surfaces = [font.render(item, True, (255, 255, 255)) for item in menu_items]
+    item_surfaces = [font.render(item, True, (255, 255, 255))
+                     for item in menu_items]
     total_menu_height = len(menu_items) * spacing_between_items
     top_offset = (screen.get_height() - total_menu_height) // 2
 
@@ -24,7 +26,9 @@ def new_game_menu(screen, clock, font, background):
     running = True
     while running:
         screen.fill((40, 40, 40))
-        screen.blit(background, background.get_rect(center=screen.get_rect().center))
+        screen.blit(
+            background, background.get_rect(
+                center=screen.get_rect().center))
         mouse_pos = pygame.mouse.get_pos()
         hover_index = None
         back_hovered = back_rect.collidepoint(mouse_pos)
@@ -42,7 +46,8 @@ def new_game_menu(screen, clock, font, background):
 
         # Draw back button
         if back_hovered:
-            pygame.draw.rect(screen, (100, 100, 100), back_rect.inflate(20, 10))
+            pygame.draw.rect(screen, (100, 100, 100),
+                             back_rect.inflate(20, 10))
         screen.blit(back_surf, back_rect)
 
         pygame.display.flip()
@@ -56,7 +61,8 @@ def new_game_menu(screen, clock, font, background):
                 if hover_index is not None:
                     result = menu_items[hover_index].lower().replace(" ", "_")
                     if result == "new_game":
-                        map_size = select_map_size(screen, clock, font, background)
+                        map_size = select_map_size(
+                            screen, clock, font, background)
                         if map_size:
                             generator = WorldGenerator(map_size)
                             filepath = generator.generate_and_save()
@@ -76,9 +82,13 @@ def select_map_size(screen, clock, font, background):
 
     begin_text = "Begin Game"
     begin_surf = font.render(begin_text, True, (255, 255, 255))
-    begin_rect = begin_surf.get_rect(center=(screen.get_width() // 2, screen.get_height() - 100))
+    begin_rect = begin_surf.get_rect(
+        center=(
+            screen.get_width() // 2,
+            screen.get_height() - 100))
 
-    option_surfaces = [font.render(label, True, (255, 255, 255)) for label, _ in size_options]
+    option_surfaces = [font.render(label, True, (255, 255, 255))
+                       for label, _ in size_options]
     option_rects = [
         surf.get_rect(centerx=screen.get_width() // 2,
                       top=200 + i * spacing_between_items)
@@ -93,7 +103,9 @@ def select_map_size(screen, clock, font, background):
     running = True
     while running:
         screen.fill((40, 40, 40))
-        screen.blit(background, background.get_rect(center=screen.get_rect().center))
+        screen.blit(
+            background, background.get_rect(
+                center=screen.get_rect().center))
         mouse_pos = pygame.mouse.get_pos()
         hover_index = None
         begin_hovered = begin_rect.collidepoint(mouse_pos)
@@ -111,12 +123,16 @@ def select_map_size(screen, clock, font, background):
             screen.blit(surf, rect)
 
         # Draw Begin Game button
-        pygame.draw.rect(screen, (120, 80, 80) if begin_hovered else (80, 80, 80), begin_rect.inflate(30, 20))
+        pygame.draw.rect(
+            screen, (120, 80, 80) if begin_hovered else (
+                80, 80, 80), begin_rect.inflate(
+                30, 20))
         screen.blit(begin_surf, begin_rect)
 
         # Draw Back button
         if back_hovered:
-            pygame.draw.rect(screen, (100, 100, 100), back_rect.inflate(20, 10))
+            pygame.draw.rect(screen, (100, 100, 100),
+                             back_rect.inflate(20, 10))
         screen.blit(back_surf, back_rect)
 
         pygame.display.flip()

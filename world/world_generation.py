@@ -10,28 +10,45 @@ import pygame
 
 # === Tunable thresholds and generation weights ===
 
-WATER_THRESHOLD = 0.1                   # lower = more ocean coverage, higher = less water
-BEACH_THRESHOLD = 0.2                   # lower = thinner beaches, higher = thicker coastal bands
+# lower = more ocean coverage, higher = less water
+WATER_THRESHOLD = 0.1
+# lower = thinner beaches, higher = thicker coastal bands
+BEACH_THRESHOLD = 0.2
 
-HILL_THRESHOLD = 0.72                   # between mountain and normal terrain; defines hills
-HILL_BUILDABLE = False                  # restrict building on hills
-MOUNTAIN_THRESHOLD = 0.78               # lower = more mountains, higher = fewer and rarer peaks
-SECONDARY_ELEVATION_WEIGHT = 0.35       # higher = sharper mountain peaks, lower = flatter elevation curves
+# between mountain and normal terrain; defines hills
+HILL_THRESHOLD = 0.72
+# restrict building on hills
+HILL_BUILDABLE = False
+# lower = more mountains, higher = fewer and rarer peaks
+MOUNTAIN_THRESHOLD = 0.78
+# higher = sharper mountain peaks, lower = flatter elevation curves
+SECONDARY_ELEVATION_WEIGHT = 0.35
 
-FOREST_MOISTURE_THRESHOLD = 0.65        # lower = more forest coverage, higher = more grassland instead
-GRASSLAND_MOISTURE_THRESHOLD = 0.45     # lower = more grassland in dry areas, higher = more desert
+# lower = more forest coverage, higher = more grassland instead
+FOREST_MOISTURE_THRESHOLD = 0.65
+# lower = more grassland in dry areas, higher = more desert
+GRASSLAND_MOISTURE_THRESHOLD = 0.45
 
-FARMLAND_CHANCE = 0.20                  # higher = more grassland tiles turn into farmland
-DESERT_CHANCE = 0.15                    # higher = more dry grassland becomes desert
+# higher = more grassland tiles turn into farmland
+FARMLAND_CHANCE = 0.20
+# higher = more dry grassland becomes desert
+DESERT_CHANCE = 0.15
 
-HILL_GOLD_CHANCE = 0.05                 # rare chance hills contain gold
+# rare chance hills contain gold
+HILL_GOLD_CHANCE = 0.05
 GOLD_EDGE_CHANCE = 0.25
-GOLD_MIN, GOLD_MAX = 1, 4               # raise max for more gold per mountain tile
-WOOD_MIN, WOOD_MAX = 3, 9               # increase for denser forest resource output
-FOOD_MIN, FOOD_MAX = 2, 5               # higher = more productive farmland
+# raise max for more gold per mountain tile
+GOLD_MIN, GOLD_MAX = 1, 4
+# increase for denser forest resource output
+WOOD_MIN, WOOD_MAX = 3, 9
+# higher = more productive farmland
+FOOD_MIN, FOOD_MAX = 2, 5
 
-BIOME_SMOOTHING_NOISE_SCALE = 0.05      # lower = smoother biome edges, higher = rougher/jagged transitions
-PREVIEW_TILE_SIZE = 2                   # increase = larger saved map images, decrease = smaller previews
+# lower = smoother biome edges, higher = rougher/jagged transitions
+BIOME_SMOOTHING_NOISE_SCALE = 0.05
+# increase = larger saved map images, decrease = smaller previews
+PREVIEW_TILE_SIZE = 2
+
 
 class WorldGenerator:
     def __init__(self, grid_size, jitter=0.5, wavelength=0.5):
@@ -58,8 +75,12 @@ class WorldGenerator:
         ])
 
     def _apply_smoothing(self, x, y):
-        dx = snoise2(x * 0.5, y * 0.5, base=self.noise_seed + 100) * BIOME_SMOOTHING_NOISE_SCALE
-        dy = snoise2(x * 0.5 + 100, y * 0.5 + 100, base=self.noise_seed + 200) * BIOME_SMOOTHING_NOISE_SCALE
+        dx = snoise2(x * 0.5, y * 0.5, base=self.noise_seed +
+                     100) * BIOME_SMOOTHING_NOISE_SCALE
+        dy = snoise2(
+            x * 0.5 + 100,
+            y * 0.5 + 100,
+            base=self.noise_seed + 200) * BIOME_SMOOTHING_NOISE_SCALE
         return x + dx, y + dy
 
     def _get_elevation(self, x, y):
@@ -67,9 +88,11 @@ class WorldGenerator:
         nx = fx / self.grid_size - 0.5
         ny = fy / self.grid_size - 0.5
 
-        base = (1 + snoise2(nx / self.wavelength, ny / self.wavelength, base=self.noise_seed)) / 2
+        base = (1 + snoise2(nx / self.wavelength, ny /
+                self.wavelength, base=self.noise_seed)) / 2
         sharp = (1 + snoise2(nx * 3, ny * 3, base=self.noise_seed + 300)) / 2
-        combined = (1 - SECONDARY_ELEVATION_WEIGHT) * base + SECONDARY_ELEVATION_WEIGHT * sharp
+        combined = (1 - SECONDARY_ELEVATION_WEIGHT) * \
+            base + SECONDARY_ELEVATION_WEIGHT * sharp
 
         d = 2 * max(abs(nx), abs(ny))
         return max(0.0, min(1.0, (1 + combined - d) / 2))
@@ -78,7 +101,8 @@ class WorldGenerator:
         fx, fy = self._apply_smoothing(x, y)
         nx = fx / self.grid_size - 0.5
         ny = fy / self.grid_size - 0.5
-        m = (1 + snoise2((nx + 100) / self.wavelength, (ny + 100) / self.wavelength, base=self.noise_seed)) / 2
+        m = (1 + snoise2((nx + 100) / self.wavelength, (ny + 100) /
+             self.wavelength, base=self.noise_seed)) / 2
         return max(0.0, min(1.0, m))
 
     def _assign_biome(self, elevation, moisture):
@@ -133,7 +157,14 @@ class WorldGenerator:
                         resources["gold"] = random.randint(GOLD_MIN, GOLD_MAX)
                     buildable = HILL_BUILDABLE
 
-                tile = Tile(x, y, biome, elevation, moisture, resources, buildable)
+                tile = Tile(
+                    x,
+                    y,
+                    biome,
+                    elevation,
+                    moisture,
+                    resources,
+                    buildable)
                 tile_map[(x, y)] = tile
                 tiles.append(tile)
 
@@ -144,13 +175,18 @@ class WorldGenerator:
 
             neighbors = [
                 tile_map.get((nx, ny))
-                for nx, ny in [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]
+                for nx, ny in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]
             ]
             if any(n is None or n.biome != "mountain" for n in neighbors):
                 if random.random() < GOLD_EDGE_CHANCE:
                     tile.resources["gold"] = random.randint(GOLD_MIN, GOLD_MAX)
 
-        print("Tiles generated:", len(tiles), "Expected:", self.grid_size * self.grid_size)
+        print(
+            "Tiles generated:",
+            len(tiles),
+            "Expected:",
+            self.grid_size *
+            self.grid_size)
         return tiles
 
     def generate_and_save(self):

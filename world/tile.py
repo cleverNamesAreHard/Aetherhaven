@@ -1,6 +1,14 @@
 # world/tile.py
 class Tile:
-    def __init__(self, x, y, biome, elevation, moisture, resources, buildable=True):
+    def __init__(
+            self,
+            x,
+            y,
+            biome,
+            elevation,
+            moisture,
+            resources,
+            buildable=True):
         self.x = x
         self.y = y
         self.biome = biome
