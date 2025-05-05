@@ -10,6 +10,33 @@ You start small on a fixed size map, gathering wood, gold, and food.  From there
 ## Flowchart
 See [flow_diagram.md](flow_diagram.md)
 
+## Setup
+
+1. Install [Python](https://www.python.org/downloads/release/python-3130/)
+
+2. Clone the Repo
+
+```
+git clone https://github.com/cleverNamesAreHard/Aetherhaven.git
+```
+
+3. Download the Assets [here](https://drive.google.com/drive/folders/1ay2fpUbLDSlYntcqhPshA07vCQpJmvQD?usp=sharing) and place them into the `assets` folder in the repo (note, once we have our own assets, we won't need to do this).
+
+4. Create the Virtual Environtment, Activate It, and Install Requirements
+
+```
+cd Aetherhaven
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+5. Run it
+
+```
+python run.py
+```
+
 ## Contributing
 
 Wanna help?  Fork it and open a pull request when you're ready for review.  Try to keep things clean and modular.  No giant god-files, please.
