@@ -1,8 +1,7 @@
-import os
 import pygame
+import os
 from core.config import FONT_PATH, MENU_LOGO_PATH, MENU_BACKGROUND_PATH
 from ui.new_game import new_game_menu
-
 
 def has_save_files():
     save_dir = "save_data"
@@ -10,11 +9,8 @@ def has_save_files():
 
 def main_menu(screen, clock):
     font = pygame.font.Font(FONT_PATH, 30)
-    menu_items = []
-    if has_save_files():
-        menu_items.append("Resume Game")
-    menu_items += ["New Game", "Load Game", "Settings", "Quit"]
 
+    # Load assets
     logo = pygame.image.load(MENU_LOGO_PATH).convert_alpha()
     logo_rect = logo.get_rect()
 
@@ -22,10 +18,16 @@ def main_menu(screen, clock):
     background.set_alpha(int(255 * 0.15))
     bg_rect = background.get_rect(center=screen.get_rect().center)
 
+    # Dynamically build menu
+    menu_items = []
+    if has_save_files():
+        menu_items.append("Resume Game")
+    menu_items += ["New Game", "Load Game", "Settings", "Quit"]
+
     spacing_between_logo_and_menu = 20
     spacing_between_items = 50
-    item_surfaces = [font.render(item, True, (255, 255, 255)) for item in menu_items]
 
+    item_surfaces = [font.render(item, True, (255, 255, 255)) for item in menu_items]
     total_menu_height = logo_rect.height + spacing_between_logo_and_menu + len(menu_items) * spacing_between_items
     top_offset = (screen.get_height() - total_menu_height) // 2
 
@@ -67,8 +69,14 @@ def main_menu(screen, clock):
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 if hover_index is not None:
                     selection = menu_items[hover_index].lower().replace(" ", "_")
+
                     if selection == "new_game":
-                        return new_game_menu(screen, clock, font, background)
-                    return selection
+                        result = new_game_menu(screen, clock, font, background)
+                        if isinstance(result, tuple) and result[0] == "start_game":
+                            return result
+                        elif result == "quit":
+                            return "quit"
+                    else:
+                        return selection
 
         clock.tick(60)
