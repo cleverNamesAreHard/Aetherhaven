@@ -59,11 +59,13 @@ python run.py
 
 ## Contributing
 
-Wanna help?  Fork it and open a pull request when you're ready for review.  Try to keep things clean and modular.  No giant god-files, please.
+Wanna help? Fork it and open a pull request when you're ready for review. Try to keep things clean and modular. No giant god-files, please.
 
-If you're adding a new system, try to keep function separated: ui where ui goes, utils where utils go, etc.  If you're fixing a bug, you're a real one.
+If you're adding a new system, try to keep function separated: UI where UI goes, utils where utils go, etc. If you're fixing a bug, you're a real one.
 
-I recommend you use **autopep8**.  I will be going through and doing this myself soon on the whole repo.
+**Important:** Commits to the `master` branch in this repo must be **SSH-signed**.  If your pull request includes unsigned commits, GitHub will block the merge.  Make sure to [set up SSH commit signing](https://stackoverflow.com/questions/72844616/how-do-i-sign-git-commits-using-my-existing-ssh-key) before opening a pull request.
+
+I recommend you use **autopep8**. I will be going through and doing this myself soon on the whole repo.
 
 ## TO-DO
 
