@@ -59,7 +59,7 @@ python run.py
 
 ## Contributing
 
-Wanna help? Fork it and open a pull request when you're ready for review. Try to keep things clean and modular. No giant god-files, please.
+Wanna help?  Fork it and open a pull request when you're ready for review.  Try to keep things clean and modular.  No giant god-files, please.  If you're looking for stuff to do, feel free to check out the [TO-DO](#TO-DO) section at the bottom of the page.
 
 If you're adding a new system, try to keep function separated: UI where UI goes, utils where utils go, etc. If you're fixing a bug, you're a real one.
 
