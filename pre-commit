@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "Running autopep8 pre-commit hook via Bash..."
+
+# Find all staged .py files that are not in excluded paths
+git diff --cached --name-only --diff-filter=ACM | grep '\.py$' |
+grep -v '/venv/' | grep -v 'pycache' | grep -v '/migrations/' |
+while read -r file; do
+    if [ -f "$file" ]; then
+        echo "Formatting $file"
+        autopep8 --in-place --aggressive --aggressive "$file"
+        git add "$file"
+    fi
+done
+
+echo "Done."
+exit 0

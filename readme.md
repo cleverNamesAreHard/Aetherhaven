@@ -65,11 +65,31 @@ If you're adding a new system, try to keep function separated: UI where UI goes,
 
 **Important:** Commits to the `master` branch in this repo must be **SSH-signed**.  If your pull request includes unsigned commits, GitHub will block the merge.  Make sure to [set up SSH commit signing](https://stackoverflow.com/questions/72844616/how-do-i-sign-git-commits-using-my-existing-ssh-key) before opening a pull request.
 
-I recommend you use **autopep8**. I will be going through and doing this myself soon on the whole repo.
+I recommend you use **autopep8**.  This has been been done for the whole repo, but 
 
-### AutoPep8
+### AutoPep8 Pre-commit Hook Setup
 
-Windows users, while inside the repo, you can run `cp pre-commit.ps1 .git/hooks/pre-commit.ps1`, and it will cause AutoPep8 to run prior to each commit automatically.
+To run `autopep8` automatically on staged `.py` files before each commit:
+
+#### Requirements
+
+- Git installed: https://git-scm.com/
+  - On Windows, install with **Git Bash** enabled.
+- `autopep8` installed in your virtual environment:
+  ```bash
+  pip install -r requirements.txt
+  ```
+- Virtual environment must be activated before committing.
+
+#### Setup (from repo root)
+
+```bash
+cp pre-commit .git/hooks/pre-commit
+# For Mac/Linux:
+chmod +x .git/hooks/pre-commit
+```
+
+This sets up a Git hook that runs `autopep8` on staged files on commit.
 
 ## TO-DO
 
