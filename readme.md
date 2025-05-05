@@ -1,5 +1,8 @@
 Aetherhaven is a peaceful, top-down city and farm building game built with PyGame. Players start on a 100x100 map and expand infinitely by gathering resources (wood, gold, food) and constructing buildings. No combat. Focus is on growth, exploration, and empire-building.
 
+## The Game Running So Far:
+![New Game GIF]("new_game_example.gif")
+
 ## Flowchart
 See [flow_diagram.md](flow_diagram.md)
 
