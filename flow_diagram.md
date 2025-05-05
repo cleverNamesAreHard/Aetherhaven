@@ -1,6 +1,6 @@
 ## Flowchart
 Flowchart made with [Mermaid.js](https://mermaid.live)
-![Game Flowchart](https://i.imgur.com/6uZZnha.png)
+![Game Flowchart](flow_diagram.png)
 
 ## Theme
 ```
