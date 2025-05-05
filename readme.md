@@ -12,7 +12,7 @@ See [flow_diagram.md](flow_diagram.md)
 
 ## Setup
 
-1. Install [Python](https://www.python.org/downloads/release/python-3130/)
+1. Install [Python](https://www.python.org/downloads/release/python-3130/).  The requirements are specifically for 3.13.2.
 
 2. Clone the Repo
 
@@ -20,18 +20,38 @@ See [flow_diagram.md](flow_diagram.md)
 git clone https://github.com/cleverNamesAreHard/Aetherhaven.git
 ```
 
-3. Download the Assets [here](https://drive.google.com/drive/folders/1ay2fpUbLDSlYntcqhPshA07vCQpJmvQD?usp=sharing) and place them into the `assets` folder in the repo (note, once we have our own assets, we won't need to do this).
+3. Download the Assets [here](https://drive.google.com/drive/folders/1ay2fpUbLDSlYntcqhPshA07vCQpJmvQD?usp=sharing) and place them into the `assets` folder in the repo.
 
-4. Create the Virtual Environtment, Activate It, and Install Requirements
+Currently, I don't want to host them on the GitHub due to using a few AI-generated assets, so they're up in Google Drive.  They're folders you can download directly (and verify are real).  They contain some logos, backgrounds, and a font.
+
+4. Create the Virtual Environment
 
 ```
 cd Aetherhaven
 python -m venv venv
+```
+
+5. Activate the Virtual Environment
+
+Windows:
+
+```
 .\venv\Scripts\activate
+```
+
+Mac/Linux:
+
+```
+./venv/bin/activate
+```
+
+6. Install Requirements
+
+```
 pip install -r requirements.txt
 ```
 
-5. Run it
+7. Run it
 
 ```
 python run.py
@@ -41,7 +61,7 @@ python run.py
 
 Wanna help?  Fork it and open a pull request when you're ready for review.  Try to keep things clean and modular.  No giant god-files, please.
 
-If you're adding a new system, try to keep function separated: ui where ui goes, utils where utils go, etc.. If you're fixing a bug, you're a real one.
+If you're adding a new system, try to keep function separated: ui where ui goes, utils where utils go, etc.  If you're fixing a bug, you're a real one.
 
 I recommend you use **autopep8**.  I will be going through and doing this myself soon on the whole repo.
 
