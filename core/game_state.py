@@ -1,0 +1,1 @@
+CURRENT_SAVE_PATH = None
