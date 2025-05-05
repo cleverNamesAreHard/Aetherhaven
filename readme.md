@@ -65,7 +65,7 @@ If you're adding a new system, try to keep function separated: UI where UI goes,
 
 **Important:** Commits to the `master` branch in this repo must be **SSH-signed**.  If your pull request includes unsigned commits, GitHub will block the merge.  Make sure to [set up SSH commit signing](https://stackoverflow.com/questions/72844616/how-do-i-sign-git-commits-using-my-existing-ssh-key) before opening a pull request.
 
-I recommend you use **autopep8**.  This has been been done for the whole repo, but 
+I recommend you use **autopep8**.  This has been been done for the whole repo, but I recommend you set up a pre-commit hook to ensure compatibility.
 
 ### AutoPep8 Pre-commit Hook Setup
 
